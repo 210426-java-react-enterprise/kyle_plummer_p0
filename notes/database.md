@@ -1,11 +1,11 @@
 ## Database needs to be in 3NF:
 ### 1NF:
-	Each cell contains a single value
-	Each record(row) is unique
+- Each cell contains a single value
+- Each record(row) is unique
 ### 2NF:
-	PK must be single column
+- PK must be single column
 ### 3NF:
-	No transitive Functional Dependencies
+- No transitive Functional Dependencies
  
  
 ## Tables:
