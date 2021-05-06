@@ -15,26 +15,28 @@ public class ConnectionFactory {
 
     private static String testStr;
 
+//host-url=jdbc:postgresql://quizzard.c0nbqj7oncuf.us-east-1.rds.amazonaws.com:5432/postgres?searchpath=quizzard
 
     private ConnectionFactory(Properties props) {
         //private constructor
 
-        System.out.println("DEBUG: jdbc:postgresql://"
-                        + props.getProperty("host") + ":"
-                        + props.getProperty("port") + "/"
-                        + props.getProperty("dbname") + ", "
-                + props.getProperty("username") + ", "
-                + props.getProperty("password"));
+//        System.out.println("DEBUG: jdbc:postgresql://"
+//                        + props.getProperty("host") + ":"
+//                        + props.getProperty("port") + "/"
+//                        + props.getProperty("dbname") + ", "
+//                + props.getProperty("username") + ", "
+//                + props.getProperty("password"));
 
         try {
             Connection connection = DriverManager.getConnection(
                 "jdbc:postgresql://"
                         + props.getProperty("host") + ":"
                         + props.getProperty("port") + "/"
-                        + props.getProperty("dbname"),
+                        + props.getProperty("dbname")
+                        + "?currentSchema=" + props.getProperty("schemaname"),
                 props.getProperty("username"),
                 props.getProperty("password"));
-            Class.forName("org.postgresql.Driver");
+            Class.forName(props.getProperty("driver"));
             if (connection != null) {
                 System.out.println("Connected to the database!");
             } else {
@@ -71,11 +73,16 @@ public class ConnectionFactory {
         return connection;
     }
 
-    public void finalize() {
+    public void closeConnection() {
         try {
             connection.close();
         } catch (SQLException e) {
             System.out.println("SQL Exception while closing conneciton: " + e);
         }
     }
+
+    public void finalize() {
+        this.closeConnection();
+    }
+
 }

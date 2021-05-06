@@ -12,8 +12,10 @@ Tables:
 
 Users
 User_ID (PK)
-Name
-<other user info>
+first_name
+last_name
+address
+email
 Username
 Password
 
