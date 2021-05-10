@@ -19,11 +19,17 @@ public class RegisterUI extends UserInterface{
         int maxAttempts = 3;
         System.out.println("\n\n\nRegister User\n===================================");
         try {
-            newUser.setUsername(UserService.promptUser("Enter new username: ",
-                    "Username malformed.",
-                    maxAttempts,
-                    "^[a-zA-Z0-9]{1,40}$",
-                    consoleReader));
+            boolean usernameExists = false;
+            do {
+                newUser.setUsername(UserService.promptUser("Enter new username: ",
+                        "Username malformed.",
+                        maxAttempts,
+                        "^[a-zA-Z0-9]{1,40}$",
+                        consoleReader));
+                if(usernameExists = UserService.checkUserExists(newUser)) {
+                    System.out.println("Username already in use. Please try again.");
+                }
+            } while (usernameExists);
 
             newUser.setPassword(UserService.promptUser("Enter new password: ",
                     "Password malformed.",
@@ -60,6 +66,8 @@ public class RegisterUI extends UserInterface{
                     maxAttempts,
                     "^[0-9]{5,5}$",
                     consoleReader));
+
+
 
             UserService.registerUser(newUser);
             app.setCurrentUser(newUser);

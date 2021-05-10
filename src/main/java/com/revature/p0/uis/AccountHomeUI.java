@@ -50,6 +50,8 @@ public class AccountHomeUI extends UserInterface{
                     app.navigate("/quit");
                     return;
                 default:
+                    System.out.println("Invalid selection. Please try again.\n\n\n");
+                    return;
 
             }
         } catch (IOException e) {

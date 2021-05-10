@@ -5,7 +5,6 @@ import com.revature.p0.pojos.AccountPOJO;
 import com.revature.p0.services.AccountService;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 
 public class NewAccountUI extends UserInterface{
     public NewAccountUI(BufferedReader consoleReader) {
