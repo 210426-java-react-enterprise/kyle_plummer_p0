@@ -1,4 +1,4 @@
-package com.revature.p0.utils;
+package com.revature.p0.utils.datastructures;
 
 public interface List<T> {
     void add(T t);//insert to end of list

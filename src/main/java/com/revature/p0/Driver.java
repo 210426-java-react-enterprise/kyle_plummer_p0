@@ -1,17 +1,21 @@
 package com.revature.p0;
 
-import com.revature.p0.daos.DatabaseDAO;
-import com.revature.p0.daos.UserDAO;
-import com.revature.p0.utils.ConnectionFactory;
+import com.revature.p0.utils.App;
 
-import java.sql.*;
+import static com.revature.p0.utils.App.getApp;
 
 
 public class Driver {
+    private static App app;
+
     public static void main(String[] args) {
-        Connection conn = ConnectionFactory.createConnection("src/main/resources/jdbc.properties").getConnection();
-        UserDAO userDAO = new UserDAO(conn, "kplummer");
-        System.out.println(userDAO.authenticate("password"));
+        app = getApp();
+
+        app.navigate("/welcome");
+        while(app.isRunning()) {
+            app.goToDestination();
+        }
+
 
 
     }

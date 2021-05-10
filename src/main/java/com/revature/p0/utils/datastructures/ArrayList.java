@@ -1,6 +1,8 @@
-package com.revature.p0.utils;
+package com.revature.p0.utils.datastructures;
 
-public class ArrayList<T> implements List{
+import com.revature.p0.utils.datastructures.List;
+
+public class ArrayList<T> implements List {
     //private T[] array;
     private Object[] array;
     private int size;
@@ -10,6 +12,12 @@ public class ArrayList<T> implements List{
         maxSize = 2;
         size = 0;
         array = new Object[maxSize];
+    }
+
+    public ArrayList(int size) {
+        maxSize = size;
+        size = 0;
+        array = new Object[size];
     }
 
     public ArrayList(T ...t) {
@@ -30,6 +38,7 @@ public class ArrayList<T> implements List{
         }
 
         array[size] = o;
+        size++;
     }
 
     @Override
@@ -84,6 +93,7 @@ public class ArrayList<T> implements List{
 
 
     private void growArray(){
+        //System.out.println("Growing Array from " + maxSize + " to " + maxSize * 2);
         //set up new array
         maxSize = maxSize * 2;
         Object[] tempArray = array;
