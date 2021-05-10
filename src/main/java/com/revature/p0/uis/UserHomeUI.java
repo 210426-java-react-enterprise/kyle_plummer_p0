@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class UserHomeUI extends UserInterface{
     public UserHomeUI(BufferedReader consoleReader) {
-        super("/login", consoleReader);
+        super("/userhome", consoleReader);
         //this.consoleReader = consoleReader;
 
     }

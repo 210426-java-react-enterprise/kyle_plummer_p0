@@ -24,6 +24,7 @@ public class LoginUI extends UserInterface{
         try {
             System.out.println("\n\n\nLog in:\n===================================");
 
+            
             System.out.printf("username: ");
             username = consoleReader.readLine();
 
@@ -32,10 +33,11 @@ public class LoginUI extends UserInterface{
 
             UserPOJO user = UserService.authenticateUser(username, password);
 
-            app.navigate("/quit");
+            app.storeObject(user);
+            app.navigate("/userhome");
 
         } catch (Exception e) {
-            //do something
+            System.out.println("Exception: " + e);
         }
     }
 }

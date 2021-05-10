@@ -32,6 +32,7 @@ public class App {
         userInterfaces.add(new WelcomeUI(consoleReader));
         userInterfaces.add(new LoginUI(consoleReader));
         userInterfaces.add(new RegisterUI(consoleReader));
+        userInterfaces.add(new UserHomeUI(consoleReader));
         userInterfaces.add(new QuitUI(consoleReader));
 
 
@@ -59,14 +60,18 @@ public class App {
     }
 
     public void navigate(String route) {
+        //System.out.println("DEBUG: navigating to: " + route);
         for (UserInterface ui : userInterfaces) {
             if(ui.getRoute().equals(route)) {
+                //System.out.println("DEBUG: route found...");
                 destination = ui;
+                //System.out.println("DEBUG: route set: " + destination.getRoute());
             }
         }
     }
 
     public void goToDestination() {
+        //System.out.println("DEBUG: Rendering: " + destination.getRoute());
         destination.render();
     }
 

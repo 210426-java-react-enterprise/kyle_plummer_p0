@@ -17,6 +17,7 @@ public class WelcomeUI extends UserInterface {
         System.out.println("\n\n\nWelcome to Bank of Plummer!");
         int attempts = 1;
         int maxAttempts = 3;
+        boolean inputFlag = false;
         do {
             System.out.println("Main Menu. Please make a selection.\n===================================");
             System.out.println("1) Register");
@@ -30,10 +31,12 @@ public class WelcomeUI extends UserInterface {
                 switch (selection) {
                     case "1":
                         app.navigate("/register");
+                        inputFlag = true;
                         break;
 
                     case "2":
                         app.navigate("/login");
+                        inputFlag = true;
                         break;
 
                     default:
@@ -49,7 +52,7 @@ public class WelcomeUI extends UserInterface {
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
             }
-        } while (attempts <= maxAttempts);
+        } while (inputFlag == false && attempts <= maxAttempts);
 
         if (attempts > maxAttempts) {
             System.out.println("Too many invalid attempts. Exiting...");

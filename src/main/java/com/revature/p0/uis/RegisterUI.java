@@ -26,11 +26,12 @@ public class RegisterUI extends UserInterface{
             do {
                 System.out.printf("Enter new username: ");
                 newUser.setUsername(consoleReader.readLine());
-                if(inputFlag = UserDAO.checkUserExists(newUser)){
-                    System.out.println("That username is already in use. Please try again. Attempts: " + attempts + "/" + maxAttempts);
+                //if(inputFlag = UserDAO.checkUserExists(newUser.getUsername())){
+                if(!(inputFlag = UserService.validateUsername(newUser.getUsername()))){
+                    System.out.println("Username already in use or malformed.");
                     attempts++;
                 }
-            } while (inputFlag && attempts <= maxAttempts);
+            } while (!inputFlag && attempts <= maxAttempts);
 
             if (attempts > maxAttempts) {
                 System.out.println("Too many attempts. Exiting to main menu.");
@@ -48,7 +49,7 @@ public class RegisterUI extends UserInterface{
                     System.out.println("Password should be 8 characters and have at least uppercase, lowercase, number, and special character.");
                     attempts++;
                 }
-            } while (inputFlag && attempts <= maxAttempts);
+            } while (!inputFlag && attempts <= maxAttempts);
 
             if (attempts > maxAttempts) {
                 System.out.println("Too many attempts. Exiting to main menu.");
@@ -61,11 +62,11 @@ public class RegisterUI extends UserInterface{
             do {
                 System.out.printf("Enter first name: ");
                 newUser.setFirstName(consoleReader.readLine());
-                if(!(inputFlag = newUser.getFirstName().length() <= 40)){
+                if(!(inputFlag = UserService.validateFirstName(newUser.getFirstName()))){
                     System.out.println("First name too long.");
                     attempts++;
                 }
-            } while (inputFlag && attempts <= maxAttempts);
+            } while (!inputFlag && attempts <= maxAttempts);
 
             if (attempts > maxAttempts) {
                 System.out.println("Too many attempts. Exiting to main menu.");
@@ -78,11 +79,11 @@ public class RegisterUI extends UserInterface{
             do {
                 System.out.printf("Enter last name: ");
                 newUser.setLastName(consoleReader.readLine());
-                if(!(inputFlag = newUser.getLastName().length() <= 40)){
-                    System.out.println("Last name too long.");
+                if(!(inputFlag = UserService.validateLastName(newUser.getLastName()))){
+                    System.out.println("Last name malformed.");
                     attempts++;
                 }
-            } while (inputFlag && attempts <= maxAttempts);
+            } while (!inputFlag && attempts <= maxAttempts);
 
             if (attempts > maxAttempts) {
                 System.out.println("Too many attempts. Exiting to main menu.");
@@ -100,7 +101,7 @@ public class RegisterUI extends UserInterface{
                     System.out.println("Email address too long.");
                     attempts++;
                 }
-            } while (inputFlag && attempts <= maxAttempts);
+            } while (!inputFlag && attempts <= maxAttempts);
 
             if (attempts > maxAttempts) {
                 System.out.println("Too many attempts. Exiting to main menu.");
@@ -114,11 +115,11 @@ public class RegisterUI extends UserInterface{
             do {
                 System.out.printf("Enter street address: ");
                 newUser.setAddress(consoleReader.readLine());
-                if(!(inputFlag = newUser.getAddress().length() <= 40)){
+                if(!(inputFlag = UserService.validateAddress(newUser.getAddress()))){
                     System.out.println("Address too long.");
                     attempts++;
                 }
-            } while (inputFlag && attempts <= maxAttempts);
+            } while (!inputFlag && attempts <= maxAttempts);
 
             if (attempts > maxAttempts) {
                 System.out.println("Too many attempts. Exiting to main menu.");
@@ -134,17 +135,18 @@ public class RegisterUI extends UserInterface{
                 String inputString = consoleReader.readLine();
                 try {
                     newUser.setZipCode(Integer.parseInt(inputString));
+                    //System.out.println("DEBUG: Int parsed: " + newUser.getZipCode());
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid zip code");
                     attempts++;
                     continue;
                 }
-                newUser.setLastName(consoleReader.readLine());
-                if(!(inputFlag = newUser.getZipCode() <= 99999 && newUser.getZipCode() >= 11111)){
-                    System.out.println("Last name too long.");
+
+                if(!(inputFlag = UserService.validateZipCode(newUser.getZipCode()))){
+                    System.out.println("Zip code malformed.");
                     attempts++;
                 }
-            } while (inputFlag && attempts <= maxAttempts);
+            } while (!inputFlag && attempts <= maxAttempts);
 
             if (attempts > maxAttempts) {
                 System.out.println("Too many attempts. Exiting to main menu.");
@@ -152,7 +154,9 @@ public class RegisterUI extends UserInterface{
                 return;
             }
 
-
+            //System.out.println("DEBUG: registering...");
+            UserService.registerUser(newUser);
+            //System.out.println("New user registered!");
 
             app.storeObject(newUser);
             app.navigate("/userhome");

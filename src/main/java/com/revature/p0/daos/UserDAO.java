@@ -64,13 +64,12 @@ public class UserDAO extends DatabaseDAO {
 
 
     public static void registerUser(UserPOJO newUser) {
-        newUser.setUserID(UUID.randomUUID());
-        newUser.setActive(true);
         try {
             String sql = "INSERT INTO users (user_id, firstname, lastname, streetaddress, zipcode, email, username, password, active) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = createStatement(sql, newUser.getUserID(), newUser.getFirstName(), newUser.getLastName(),
                     newUser.getAddress(), newUser.getZipCode(), newUser.getEmail(), newUser.getUsername(), newUser.getPassword(), newUser.isActive());
+            //System.out.println("Executing sql statement: " + sql);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("SQLException: " + e);
@@ -78,6 +77,5 @@ public class UserDAO extends DatabaseDAO {
             System.out.println("NullPointerException: " + e);
         }
     }
-
 
 }

@@ -13,6 +13,7 @@ public class Driver {
 
         app.navigate("/welcome");
         while(app.isRunning()) {
+            //System.out.println("DEBUG: apprunning loop");
             app.goToDestination();
         }
 
