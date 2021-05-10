@@ -9,14 +9,14 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 
 
-public class UserService {
+public abstract class UserService {
 
-    public static UserPOJO authenticateUser(String username, String password) throws UserFailedToLogin {
+    public static UserPOJO authenticateUser(String username, String password) {
         UserPOJO user = new UserPOJO(username, password);
         if (UserDAO.authenticate(user)) {
             return user;
         } else {
-            throw new UserFailedToLogin();
+            return null;
         }
     }
 

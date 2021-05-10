@@ -1,7 +1,13 @@
 package com.revature.p0.uis;
 
+import com.revature.p0.pojos.AccountPOJO;
+import com.revature.p0.services.AccountService;
+import com.revature.p0.utils.datastructures.LinkedList;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.Iterator;
 
 public class UserHomeUI extends UserInterface{
     public UserHomeUI(BufferedReader consoleReader) {
@@ -12,29 +18,42 @@ public class UserHomeUI extends UserInterface{
 
     @Override
     public void render() {
-        System.out.println("\n\n\nWelcome!\nUser Menu. Please make a selection.\n===================================");
-        //choose account
-        //loop through accounts displaying each with an int.
-        //N) new account
-        //Q) quit
+        LinkedList<AccountPOJO> accountList = AccountService.getAccounts(app.getCurrentUser());
+        //Iterator<AccountPOJO> iter = accountList.iterator();
+
+        System.out.printf("\n\n\nWelcome, %s!\nUser Menu. Please make a selection.\n===================================\n", app.getCurrentUser().getFirstName());
+        System.out.println("N) New Account");
+        //NumberFormat dollars = NumberFormat.getCurrencyInstance();
+        for (int i = 0; i < accountList.size(); i++) {
+            System.out.printf("%d) %s: %d (Bal: $%.2f)\n", i, accountList.get(i).getAccountType(), accountList.get(i).getAccountNum(), accountList.get(i).getBalance());
+        }
+        System.out.println("Q) Quit");
         System.out.println("===================================");
         try {
 
             String selection = consoleReader.readLine();
-
             switch (selection) {
-                case "1":
-                    app.navigate("/register");
+                case "N":
+                    app.navigate("/newaccount");
                     break;
 
-                case "2":
-                    app.navigate("/login");
+                case "Q":
+                    app.navigate("/quit");
                     break;
+
+                default:
+                    Integer accountSelection = Integer.parseInt(selection);
+                    if(accountSelection >= 0 && accountSelection < accountList.size()) {
+                        app.setCurrentAccount(accountList.get(accountSelection));
+                        app.navigate("/accounthome");
+                    }
+                break;
             }
 
         } catch (IOException e) {
-            System.out.println("IOException" + e);
-
+            System.out.println("IOException: " + e);
+        } catch (NumberFormatException e) {
+            System.out.println("NumberFormatException: " + e);
         } catch (Exception e) {
             System.out.println("Exception: " + e);
         }

@@ -3,17 +3,22 @@ package com.revature.p0.pojos;
 import java.util.UUID;
 
 public class AccountAccessPOJO {
-    private UUID accountAccessPOJO;
+    private UUID accountAccessID;
     private UUID userID;
     private UUID accountID;
-    private boolean active;
 
     public AccountAccessPOJO() {
 
     }
 
-    public UUID getAccountAccessPOJO() {
-        return accountAccessPOJO;
+    public AccountAccessPOJO(UUID accountAccessID, UUID userID, UUID accountID) {
+        this.accountAccessID = accountAccessID;
+        this.userID = userID;
+        this.accountID = accountID;
+    }
+
+    public UUID getAccountAccessID() {
+        return accountAccessID;
     }
 
     public UUID getUserID() {
@@ -24,12 +29,8 @@ public class AccountAccessPOJO {
         return accountID;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setAccountAccessPOJO(UUID accountAccessPOJO) {
-        this.accountAccessPOJO = accountAccessPOJO;
+    public void setAccountAccessID(UUID accountAccessPOJO) {
+        this.accountAccessID = accountAccessPOJO;
     }
 
     public void setUserID(UUID userID) {
@@ -38,9 +39,5 @@ public class AccountAccessPOJO {
 
     public void setAccountID(UUID accountID) {
         this.accountID = accountID;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 }

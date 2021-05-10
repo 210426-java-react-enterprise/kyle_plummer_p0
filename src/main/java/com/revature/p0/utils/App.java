@@ -1,5 +1,7 @@
 package com.revature.p0.utils;
 
+import com.revature.p0.pojos.AccountPOJO;
+import com.revature.p0.pojos.UserPOJO;
 import com.revature.p0.uis.*;
 import com.revature.p0.utils.datastructures.LinkedList;
 
@@ -18,6 +20,8 @@ public class App {
     //letting render() complete and return to the app loop, and then invoke the next desination. I will need
     //to pass objects sometimes, so I'll use traversalPOJOHolder to hold a single POJO at a time for UI traversals.
     ////////////////////////////////////////////////////////
+    private static UserPOJO currentUser;
+    private static AccountPOJO currentAccount;
     private static UserInterface destination;
     private static Object traversalPOJOHolder;
     /////////////////////////////////////////////////////////
@@ -29,10 +33,12 @@ public class App {
         this.consoleReader = new BufferedReader(new InputStreamReader(System.in));
         this.userInterfaces = new LinkedList<UserInterface>();
 
+        //automate this list via some sort of file search on uis package path?
         userInterfaces.add(new WelcomeUI(consoleReader));
         userInterfaces.add(new LoginUI(consoleReader));
         userInterfaces.add(new RegisterUI(consoleReader));
         userInterfaces.add(new UserHomeUI(consoleReader));
+        userInterfaces.add(new AccountHomeUI(consoleReader));
         userInterfaces.add(new QuitUI(consoleReader));
 
 
@@ -83,6 +89,22 @@ public class App {
         Object o = traversalPOJOHolder;
         traversalPOJOHolder = null;
         return o;
+    }
+
+    public void setCurrentUser(UserPOJO user) {
+        currentUser = user;
+    }
+
+    public UserPOJO getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentAccount(AccountPOJO currentAccount) {
+        App.currentAccount = currentAccount;
+    }
+
+    public AccountPOJO getCurrentAccount() {
+        return currentAccount;
     }
 
     public boolean isRunning() {
