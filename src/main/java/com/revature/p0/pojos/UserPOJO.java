@@ -7,7 +7,8 @@ public class UserPOJO {
     private String firstName;
     private String lastName;
     private String address;
-    private Integer zipCode;
+    //private Integer zipCode;
+    private String zipCode;
     private String email;
     private String username;
     private String password;
@@ -27,7 +28,7 @@ public class UserPOJO {
     }
 
     public UserPOJO(String firstname, String lastname, String username, String password,
-                    String address, Integer zip, String email) {
+                    String address, String zip, String email) {
         this(username, password);
         this.firstName = firstname;
         this.lastName = lastname;
@@ -52,7 +53,7 @@ public class UserPOJO {
         return address;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
@@ -88,7 +89,7 @@ public class UserPOJO {
         this.address = address;
     }
 
-    public void setZipCode(Integer zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 

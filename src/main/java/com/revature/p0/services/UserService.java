@@ -1,15 +1,13 @@
 package com.revature.p0.services;
 
 import com.revature.p0.daos.UserDAO;
-import com.revature.p0.exceptions.UserAlreadyExists;
-import com.revature.p0.exceptions.UserFailedToLogin;
 import com.revature.p0.pojos.UserPOJO;
 
 import java.util.UUID;
 import java.util.regex.Pattern;
 
 
-public abstract class UserService {
+public abstract class UserService extends Service{
 
     public static UserPOJO authenticateUser(String username, String password) {
         UserPOJO user = new UserPOJO(username, password);

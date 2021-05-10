@@ -163,13 +163,6 @@ GRANT all privileges ON ALL TABLES IN SCHEMA bankofplummer TO appuser;
 
 
 
---select authenticate('c22e23be-ae96-11eb-a29a-6795717e0c81', 'password');
 
---select * from users
---insert into account_access values (uuid_generate_v1mc(), 'c22e27e2-ae96-11eb-a29d-5b71243297ff', 'c22e26d4-ae96-11eb-a29c-3bdaef3434e5');
---select * from account_access aa where user_id = 'c22e27e2-ae96-11eb-a29d-5b71243297ff'
---select * from accounts
-
---select * from users
 
 

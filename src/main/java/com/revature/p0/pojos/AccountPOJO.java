@@ -6,6 +6,7 @@ public class AccountPOJO {
     private UUID accountID;
     private Integer accountNum;
     private String accountType;
+    private String accountDescription;
     private double balance;
     private boolean active;
 
@@ -23,6 +24,10 @@ public class AccountPOJO {
 
     public String getAccountType() {
         return accountType;
+    }
+
+    public String getAccountDescription() {
+        return accountDescription;
     }
 
     public double getBalance() {
@@ -43,6 +48,10 @@ public class AccountPOJO {
 
     public void setAccountType(String accountType) {
         this.accountType = accountType;
+    }
+
+    public void setAccountDescription(String accountDescription) {
+        this.accountDescription = accountDescription;
     }
 
     public void setBalance(double balance) {

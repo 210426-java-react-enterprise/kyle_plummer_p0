@@ -13,7 +13,8 @@ public class AccountHomeUI extends UserInterface{
     @Override
     public void render() {
         AccountPOJO currentAccount = app.getCurrentAccount();
-        System.out.printf("\n\n\nAccount: %s - %d  (Bal: $%.2f)\n", currentAccount.getAccountType(), currentAccount.getAccountNum(), currentAccount.getBalance());
+        System.out.printf("\n\n\nAccount: %s - %d  (Bal: $%.2f)\n", app.getCurrentAccount().getAccountType(),
+                            app.getCurrentAccount().getAccountNum(), app.getCurrentAccount().getBalance());
         System.out.println("Please make a selection.\n===================================");
         System.out.println("1) Deposit");
         System.out.println("2) Withdrawal");
@@ -25,7 +26,32 @@ public class AccountHomeUI extends UserInterface{
         System.out.println("===================================");
 
         try {
-            consoleReader.readLine();
+            switch(consoleReader.readLine()){
+                case "1":
+                    app.navigate("/deopsit");
+                    return;
+                case "2":
+                    app.navigate("/withdrawal");
+                    return;
+                case "3":
+                    app.navigate("/transfer");
+                    return;
+                case "4":
+                    app.navigate("/grantaccess");
+                    return;
+                case "5":
+                    app.navigate("/transactionhistory");
+                    return;
+                case "B":
+                    app.setCurrentAccount(null);
+                    app.navigate("/userhome");
+                    return;
+                case "Q":
+                    app.navigate("/quit");
+                    return;
+                default:
+
+            }
         } catch (IOException e) {
             System.out.println("IOException: " + e);
         }
