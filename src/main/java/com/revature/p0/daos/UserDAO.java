@@ -33,7 +33,7 @@ public class UserDAO extends DatabaseDAO {
                 user.setFirstName(rs.getString("firstname"));
                 user.setLastName(rs.getString("lastname"));
                 user.setAddress(rs.getString("streetaddress"));
-                user.setZipCode(rs.getInt("zipcode"));
+                user.setZipCode(rs.getString("zipcode"));
                 user.setEmail(rs.getString("email"));
                 user.setActive(rs.getBoolean("active"));
                 return true;

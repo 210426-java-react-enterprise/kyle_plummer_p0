@@ -1,4 +1,4 @@
 package com.revature.p0.services;
 
-public class TransactionHistoryService {
+public class TransactionHistoryService extends Service{
 }

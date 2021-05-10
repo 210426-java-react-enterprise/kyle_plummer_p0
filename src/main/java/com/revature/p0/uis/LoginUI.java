@@ -8,12 +8,9 @@ import java.io.BufferedReader;
 public class LoginUI extends UserInterface{
 
     private UserService userService;
-    //private BufferedReader consoleReader; //moved into super class
 
     public LoginUI(BufferedReader consoleReader) {
         super("/login", consoleReader);
-        //this.consoleReader = consoleReader;
-
     }
 
     @Override
@@ -23,7 +20,6 @@ public class LoginUI extends UserInterface{
 
         try {
             System.out.println("\n\n\nLog in:\n===================================");
-
 
             System.out.printf("username: ");
             username = consoleReader.readLine();

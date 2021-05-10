@@ -19,13 +19,13 @@ public class UserHomeUI extends UserInterface{
     @Override
     public void render() {
         LinkedList<AccountPOJO> accountList = AccountService.getAccounts(app.getCurrentUser());
-        //Iterator<AccountPOJO> iter = accountList.iterator();
 
-        System.out.printf("\n\n\nWelcome, %s!\nUser Menu. Please make a selection.\n===================================\n", app.getCurrentUser().getFirstName());
+        System.out.printf("\n\n\nWelcome, %s!\nUser Menu. Please make a selection.\n===================================\n",
+                app.getCurrentUser().getFirstName());
         System.out.println("N) New Account");
-        //NumberFormat dollars = NumberFormat.getCurrencyInstance();
         for (int i = 0; i < accountList.size(); i++) {
-            System.out.printf("%d) %s: %d (Bal: $%.2f)\n", i, accountList.get(i).getAccountType(), accountList.get(i).getAccountNum(), accountList.get(i).getBalance());
+            System.out.printf("%d) %s: %d (Bal: $%.2f)\n", i, accountList.get(i).getAccountType(),
+                    accountList.get(i).getAccountNum(), accountList.get(i).getBalance());
         }
         System.out.println("Q) Quit");
         System.out.println("===================================");

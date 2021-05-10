@@ -39,6 +39,7 @@ public class App {
         userInterfaces.add(new RegisterUI(consoleReader));
         userInterfaces.add(new UserHomeUI(consoleReader));
         userInterfaces.add(new AccountHomeUI(consoleReader));
+        userInterfaces.add(new NewAccountUI(consoleReader));
         userInterfaces.add(new QuitUI(consoleReader));
 
 
