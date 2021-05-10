@@ -4,6 +4,8 @@ import java.util.UUID;
 
 public class AccountPOJO {
     private UUID accountID;
+    private Integer accountNum;
+    private String accountType;
     private double balance;
     private boolean active;
 
@@ -13,6 +15,14 @@ public class AccountPOJO {
 
     public UUID getAccountID() {
         return accountID;
+    }
+
+    public Integer getAccountNum() {
+        return accountNum;
+    }
+
+    public String getAccountType() {
+        return accountType;
     }
 
     public double getBalance() {
@@ -25,6 +35,14 @@ public class AccountPOJO {
 
     public void setAccountID(UUID accountID) {
         this.accountID = accountID;
+    }
+
+    public void setAccountNum(Integer accountNum) {
+        this.accountNum = accountNum;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     public void setBalance(double balance) {
