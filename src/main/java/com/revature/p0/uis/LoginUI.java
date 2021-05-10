@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 
 public class LoginUI extends UserInterface{
 
-    private UserService userService;
+    //private UserService userService;
 
     public LoginUI(BufferedReader consoleReader) {
         super("/login", consoleReader);

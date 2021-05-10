@@ -6,14 +6,10 @@ import com.revature.p0.utils.datastructures.LinkedList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.text.NumberFormat;
-import java.util.Iterator;
 
 public class UserHomeUI extends UserInterface{
     public UserHomeUI(BufferedReader consoleReader) {
         super("/userhome", consoleReader);
-        //this.consoleReader = consoleReader;
-
     }
 
     @Override

@@ -21,9 +21,9 @@ public class WelcomeUI extends UserInterface {
         System.out.println("===================================");
         try {
 
-            String selection = consoleReader.readLine();
+            //String selection = ;
 
-            switch (selection) {
+            switch (consoleReader.readLine()) {
                 case "1":
                     app.navigate("/register");
                     return;
@@ -38,7 +38,7 @@ public class WelcomeUI extends UserInterface {
 
                 default:
                     System.out.println("Invalid selection. Please try again.\n\n\n");
-                    break;
+                    return;
             }
 
 
