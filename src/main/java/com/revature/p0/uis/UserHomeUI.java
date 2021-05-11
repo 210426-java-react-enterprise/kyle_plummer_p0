@@ -16,7 +16,7 @@ public class UserHomeUI extends UserInterface{
     public void render() {
         LinkedList<AccountPOJO> accountList = AccountService.getAccounts(app.getCurrentUser());
 
-        System.out.printf("\n\n\nWelcome, %s!\nUser Menu. Please make a selection.\n===================================\n",
+        System.out.printf("\n\n\nWelcome, %s!\nUser Menu. Please make a selection.\n==================================================\n",
                 app.getCurrentUser().getFirstName());
         System.out.println("N) New Account");
         for (int i = 0; i < accountList.size(); i++) {
@@ -24,7 +24,7 @@ public class UserHomeUI extends UserInterface{
                     accountList.get(i).getAccountNum(), accountList.get(i).getBalance());
         }
         System.out.println("Q) Quit");
-        System.out.println("===================================");
+        System.out.println("==================================================");
         try {
 
             String selection = consoleReader.readLine();

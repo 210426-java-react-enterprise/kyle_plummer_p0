@@ -14,7 +14,7 @@ public abstract class DatabaseDAO {
         conn = ConnectionFactory.getConnection();
     }
 
-    public static PreparedStatement createStatement(String sql, Object ...params) {
+    public static PreparedStatement createStatement(String sql, Object ...params) throws SQLException{
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 

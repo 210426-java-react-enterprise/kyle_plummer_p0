@@ -2,19 +2,21 @@ package com.revature.p0.pojos;
 
 import java.util.UUID;
 
-public class TransactionHistoryPOJO {
-    private UUID transactionHistoryID;
+public class TransactionPOJO {
+    private UUID transactionID;
     private UUID accountID;
     private UUID userID;
     private String transactionType;
+    private Double transactionAmount;
+    private String transactionDate;
     private boolean active;
 
-    public TransactionHistoryPOJO() {
+    public TransactionPOJO() {
 
     }
 
-    public UUID getTransactionHistoryID() {
-        return transactionHistoryID;
+    public UUID getTransactionID() {
+        return transactionID;
     }
 
     public UUID getAccountID() {
@@ -29,12 +31,20 @@ public class TransactionHistoryPOJO {
         return transactionType;
     }
 
+    public Double getTransactionAmount() {
+        return transactionAmount;
+    }
+
+    public String getTransactionDate() {
+        return transactionDate;
+    }
+
     public boolean isActive() {
         return active;
     }
 
-    public void setTransactionHistoryID(UUID transactionHistoryID) {
-        this.transactionHistoryID = transactionHistoryID;
+    public void setTransactionID(UUID transactionHistoryID) {
+        this.transactionID = transactionHistoryID;
     }
 
     public void setAccountID(UUID accountID) {
@@ -47,6 +57,14 @@ public class TransactionHistoryPOJO {
 
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
+    }
+
+    public void setTransactionAmount(Double transactionAmount) {
+        this.transactionAmount = transactionAmount;
+    }
+
+    public void setTransactionDate(String transactionDate) {
+        this.transactionDate = transactionDate;
     }
 
     public void setActive(boolean active) {
