@@ -14,11 +14,11 @@ public class WelcomeUI extends UserInterface {
     @Override
     public void render() {
         System.out.println("\n\n\nWelcome to Bank of Plummer!");
-        System.out.println("Main Menu. Please make a selection.\n===================================");
+        System.out.println("Main Menu. Please make a selection.\n==================================================");
         System.out.println("1) Register");
         System.out.println("2) Login");
         System.out.println("Q) Quit");
-        System.out.println("===================================");
+        System.out.println("==================================================");
         try {
 
             //String selection = ;

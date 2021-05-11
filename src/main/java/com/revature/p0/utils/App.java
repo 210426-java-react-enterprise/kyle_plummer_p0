@@ -13,18 +13,9 @@ public class App {
     private boolean appRunning;
     private BufferedReader consoleReader;
     private LinkedList<UserInterface> userInterfaces;
-
-
-    //instead of invoking navigate and render over and over as the user traverses the application
-    //and never letting a render method complete and return, I want to try setting the next destination,
-    //letting render() complete and return to the app loop, and then invoke the next desination. I will need
-    //to pass objects sometimes, so I'll use traversalPOJOHolder to hold a single POJO at a time for UI traversals.
-    ////////////////////////////////////////////////////////
     private static UserPOJO currentUser;
     private static AccountPOJO currentAccount;
     private static UserInterface destination;
-    private static Object traversalPOJOHolder;
-    /////////////////////////////////////////////////////////
 
 
     private App() {
@@ -40,6 +31,11 @@ public class App {
         userInterfaces.add(new UserHomeUI(consoleReader));
         userInterfaces.add(new AccountHomeUI(consoleReader));
         userInterfaces.add(new NewAccountUI(consoleReader));
+        userInterfaces.add(new DepositUI(consoleReader));
+        userInterfaces.add(new WithdrawalUI(consoleReader));
+        userInterfaces.add(new TransferUI(consoleReader));
+        userInterfaces.add(new TransactionHistoryUI(consoleReader));
+        userInterfaces.add(new AccountAccessUI(consoleReader));
         userInterfaces.add(new QuitUI(consoleReader));
 
 
@@ -53,11 +49,6 @@ public class App {
         return thisApp;
     }
 
-
-//    public void addUserInterface(UserInterface ui) {
-//        userInterfaces.add(ui);
-//    }
-
     public void oldNavigate(String route) {
         for (UserInterface ui : userInterfaces) {
             if(ui.getRoute().equals(route)) {
@@ -67,12 +58,9 @@ public class App {
     }
 
     public void navigate(String route) {
-        //System.out.println("DEBUG: navigating to: " + route);
         for (UserInterface ui : userInterfaces) {
             if(ui.getRoute().equals(route)) {
-                //System.out.println("DEBUG: route found...");
                 destination = ui;
-                //System.out.println("DEBUG: route set: " + destination.getRoute());
             }
         }
     }
@@ -80,16 +68,6 @@ public class App {
     public void goToDestination() {
         //System.out.println("DEBUG: Rendering: " + destination.getRoute());
         destination.render();
-    }
-
-    public void storeObject(Object o) {
-        traversalPOJOHolder = o;
-    }
-
-    public Object retrieveObject() {
-        Object o = traversalPOJOHolder;
-        traversalPOJOHolder = null;
-        return o;
     }
 
     public void setCurrentUser(UserPOJO user) {

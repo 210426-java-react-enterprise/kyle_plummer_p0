@@ -14,7 +14,7 @@ public class NewAccountUI extends UserInterface{
     @Override
     public void render() {
         AccountPOJO newAccount = new AccountPOJO();
-        System.out.println("\n\n\nCreate new account\n=========================");
+        System.out.println("\n\n\nCreate new account\n==================================================");
         //String returnedString = new String();
         try {
             newAccount.setAccountType(AccountService.promptUser(

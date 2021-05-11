@@ -1,19 +1,13 @@
 package com.revature.p0.daos;
 
 import com.revature.p0.pojos.UserPOJO;
-import com.sun.istack.internal.localization.NullLocalizable;
 
-import javax.xml.transform.Result;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class UserDAO extends DatabaseDAO {
-
-    private UserDAO() {
-        //private constructor. No need to instantiate this class.
-    }
+public abstract class UserDAO extends DatabaseDAO {
 
     public static boolean authenticate(UserPOJO user) {
         try {
@@ -44,7 +38,7 @@ public class UserDAO extends DatabaseDAO {
         return false;
     }
 
-    public static boolean checkUserExists(String username /*UserPOJO user*/) {
+    public static boolean checkUserExists(String username) throws SQLException {
         String sql = "SELECT user_id FROM users WHERE username = ?";
         PreparedStatement pstmt = createStatement(sql, username);
         try {
@@ -76,6 +70,25 @@ public class UserDAO extends DatabaseDAO {
         } catch (NullPointerException e) {
             System.out.println("NullPointerException: " + e);
         }
+    }
+
+    public static UserPOJO getUserByUsername(String username) throws SQLException {
+        String sql = "SELECT user_id, firstname, lastname, streetaddress, zipcode, email, active " +
+                "FROM users " +
+                "WHERE username = ? ";
+        PreparedStatement pstmt = createStatement(sql, username);
+        ResultSet rs = pstmt.executeQuery();
+        UserPOJO user = new UserPOJO();
+        if (rs.next()) {
+            user.setUserID((UUID)rs.getObject("user_id"));
+            user.setFirstName(rs.getString("firstname"));
+            user.setLastName(rs.getString("lastname"));
+            user.setAddress(rs.getString("streetaddress"));
+            user.setZipCode(rs.getString("zipcode"));
+            user.setEmail(rs.getString("email"));
+            user.setActive(rs.getBoolean("active"));
+        }
+        return user;
     }
 
 }

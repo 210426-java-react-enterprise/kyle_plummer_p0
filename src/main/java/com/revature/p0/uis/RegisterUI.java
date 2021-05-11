@@ -17,7 +17,7 @@ public class RegisterUI extends UserInterface{
     public void render() {
         UserPOJO newUser = new UserPOJO();
         int maxAttempts = 3;
-        System.out.println("\n\n\nRegister User\n===================================");
+        System.out.println("\n\n\nRegister User\n==================================================");
         try {
             boolean usernameExists = false;
             do {

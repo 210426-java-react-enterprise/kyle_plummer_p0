@@ -7,8 +7,6 @@ import java.io.BufferedReader;
 
 public class LoginUI extends UserInterface{
 
-    //private UserService userService;
-
     public LoginUI(BufferedReader consoleReader) {
         super("/login", consoleReader);
     }
@@ -19,7 +17,7 @@ public class LoginUI extends UserInterface{
         String password;
 
         try {
-            System.out.println("\n\n\nLog in:\n===================================");
+            System.out.println("\n\n\nLog in:\n==================================================");
 
             System.out.printf("username: ");
             username = consoleReader.readLine();

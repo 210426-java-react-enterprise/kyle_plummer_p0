@@ -9,8 +9,8 @@ public class Driver {
     private static App app;
 
     public static void main(String[] args) {
-        app = getApp();
 
+        app = getApp();
         app.navigate("/welcome");
         while(app.isRunning()) {
             //System.out.println("DEBUG: apprunning loop");
