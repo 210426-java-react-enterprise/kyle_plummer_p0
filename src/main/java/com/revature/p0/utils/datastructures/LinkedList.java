@@ -2,7 +2,11 @@ package com.revature.p0.utils.datastructures;
 
 import java.util.Iterator;
 
-
+/**
+ * Simple linkedlist implementation, extending custom list interface.
+ * Also implements Iterable interface.
+ * @param <T>
+ */
 public class LinkedList<T> implements List<T>, Iterable<T>{
     private Node<T> head;
     private Node<T> tail;

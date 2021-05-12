@@ -3,9 +3,15 @@ package com.revature.p0.uis;
 import com.revature.p0.exceptions.UserInputException;
 import com.revature.p0.pojos.AccountPOJO;
 import com.revature.p0.services.AccountService;
+import com.revature.p0.utils.FileLogger;
 
 import java.io.BufferedReader;
 
+/**
+ * User interface for creating a new bank account. Leads to account home.
+ *
+ * @author Kyle Plummer
+ */
 public class NewAccountUI extends UserInterface{
     public NewAccountUI(BufferedReader consoleReader) {
         super("/newaccount", consoleReader);
@@ -15,7 +21,6 @@ public class NewAccountUI extends UserInterface{
     public void render() {
         AccountPOJO newAccount = new AccountPOJO();
         System.out.println("\n\n\nCreate new account\n==================================================");
-        //String returnedString = new String();
         try {
             newAccount.setAccountType(AccountService.promptUser(
                     "Enter account type (checking|savings): ",
@@ -36,10 +41,10 @@ public class NewAccountUI extends UserInterface{
 
 
         } catch (UserInputException e) {
+            System.out.println("Failed to create new user.");
+            FileLogger.getFileLogger().writeExceptionToFile(e);
             app.navigate("/userhome");
-            return;
-        } catch (Exception e) {
-            System.out.println("IOException: " + e);
+            //return;
         }
     }
 }

@@ -6,7 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-
+/**
+ * Abstract class, to be inherited by the specific DAO classes which will handle SQL CRUD operations
+ *
+ * @author Kyle Plummer
+ */
 public abstract class DatabaseDAO {
     protected static Connection conn;
 
@@ -14,19 +18,13 @@ public abstract class DatabaseDAO {
         conn = ConnectionFactory.getConnection();
     }
 
-    public static PreparedStatement createStatement(String sql, Object ...params) throws SQLException{
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+    public static PreparedStatement createStatement(String sql, Object ...params) throws SQLException {
+        PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            for (int i = 1; i <= params.length; i++) {
-                pstmt.setObject(i, params[i-1]);
-            }
-
-            return pstmt;
-        } catch (SQLException e) {
-            System.out.println("SQL Exception: " + e);
+        for (int i = 1; i <= params.length; i++) {
+            pstmt.setObject(i, params[i-1]);
         }
-        return null;
+        return pstmt;
     }
 
 

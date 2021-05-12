@@ -1,7 +1,12 @@
 package com.revature.p0.utils.datastructures;
 
-import com.revature.p0.utils.datastructures.List;
-
+/**
+ * A fairly simple arraylist implementation extending custom list interface.
+ * Default size is 2, grows by size * 2 when needed.
+ * When an element is added or removed at an index other elements are not re-arranged.
+ *
+ * @param <T>
+ */
 public class ArrayList<T> implements List<T> {
     private Object[] array;
     private int size;

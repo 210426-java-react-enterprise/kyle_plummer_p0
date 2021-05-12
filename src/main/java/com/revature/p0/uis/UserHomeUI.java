@@ -2,11 +2,17 @@ package com.revature.p0.uis;
 
 import com.revature.p0.pojos.AccountPOJO;
 import com.revature.p0.services.AccountService;
+import com.revature.p0.utils.FileLogger;
 import com.revature.p0.utils.datastructures.LinkedList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * User interface for navigating to accounts associated with user. Displays a list of accounts to choose from
+ *
+ * @author Kyle Plummer
+ */
 public class UserHomeUI extends UserInterface{
     public UserHomeUI(BufferedReader consoleReader) {
         super("/userhome", consoleReader);
@@ -15,6 +21,7 @@ public class UserHomeUI extends UserInterface{
     @Override
     public void render() {
         LinkedList<AccountPOJO> accountList = AccountService.getAccounts(app.getCurrentUser());
+        app.setCurrentAccount(null);
 
         System.out.printf("\n\n\nWelcome, %s!\nUser Menu. Please make a selection.\n==================================================\n",
                 app.getCurrentUser().getFirstName());
@@ -31,11 +38,11 @@ public class UserHomeUI extends UserInterface{
             switch (selection) {
                 case "N":
                     app.navigate("/newaccount");
-                    break;
+                    return;
 
                 case "Q":
                     app.navigate("/quit");
-                    break;
+                    return;
 
                 default:
                     Integer accountSelection = Integer.parseInt(selection);
@@ -43,15 +50,13 @@ public class UserHomeUI extends UserInterface{
                         app.setCurrentAccount(accountList.get(accountSelection));
                         app.navigate("/accounthome");
                     }
-                break;
+                return;
             }
 
         } catch (IOException e) {
-            System.out.println("IOException: " + e);
-        } catch (NumberFormatException e) {
-            System.out.println("NumberFormatException: " + e);
-        } catch (Exception e) {
-            System.out.println("Exception: " + e);
+            //System.out.println("IOException: " + e);
+            FileLogger.getFileLogger().writeExceptionToFile(e);
+            app.navigate("/quit");
         }
 
     }

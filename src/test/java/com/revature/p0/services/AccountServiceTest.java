@@ -35,6 +35,6 @@ public class AccountServiceTest {
 
     @Test
     public void test_getAccountsForUsernameNegative() {
-        
+
     }
 }

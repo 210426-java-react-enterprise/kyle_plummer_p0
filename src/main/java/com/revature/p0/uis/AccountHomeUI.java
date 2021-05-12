@@ -1,11 +1,16 @@
 package com.revature.p0.uis;
 
-import com.revature.p0.pojos.AccountPOJO;
 import com.revature.p0.services.AccountService;
+import com.revature.p0.utils.FileLogger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * User interface for navigating to account functions, land here after choosing account.
+ *
+ * @author Kyle Plummer
+ */
 public class AccountHomeUI extends UserInterface{
     public AccountHomeUI(BufferedReader consoleReader) {
         super("/accounthome", consoleReader);
@@ -14,8 +19,6 @@ public class AccountHomeUI extends UserInterface{
     @Override
     public void render() {
         app.getCurrentAccount().setBalance(AccountService.checkBalance(app.getCurrentAccount()));
-//        System.out.printf("\n\n\nAccount: %s - %d  (Bal: $%.2f)\n", app.getCurrentAccount().getAccountDescription(),
-//                            app.getCurrentAccount().getAccountNum(), app.getCurrentAccount().getBalance());
         System.out.printf("\n\n\n%s (Acct# %d)  (Bal: $%.2f)\n", app.getCurrentAccount().getAccountDescription(),
                 app.getCurrentAccount().getAccountNum(), app.getCurrentAccount().getBalance());
         System.out.println("Please make a selection.\n==================================================");
@@ -31,7 +34,6 @@ public class AccountHomeUI extends UserInterface{
         try {
             switch(consoleReader.readLine()){
                 case "1":
-                    //System.out.println("DEBUG DEPOSIT");
                     app.navigate("/deposit");
                     return;
                 case "2":
@@ -59,7 +61,9 @@ public class AccountHomeUI extends UserInterface{
 
             }
         } catch (IOException e) {
-            System.out.println("IOException: " + e);
+            //System.out.println("IOException: " + e);
+            FileLogger.getFileLogger().writeExceptionToFile(e);
+            app.navigate("/quit");
         }
 
     }

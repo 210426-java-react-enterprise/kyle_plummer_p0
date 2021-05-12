@@ -7,6 +7,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+
+/**
+ * This factory maintains connection to the database, and returns connection objects as needed.
+ *
+ */
 public class ConnectionFactory {
     private static ConnectionFactory connectionFactory;
     private static Connection connection;
@@ -16,6 +21,12 @@ public class ConnectionFactory {
         connPropsFilePath = "src/main/resources/jdbc.properties";
     }
 
+    /**
+     * Private constructor. Attempts to establish a connection with database based on parameters
+     * found in properties file. If an exception is thrown during this process, application
+     * quit() method is invoked. If successful connection object is stored and served
+     * by getConnection() method.
+     */
     private ConnectionFactory() {
         Properties props = new Properties();
         try (FileReader jdbcPropFile = new FileReader(connPropsFilePath)){
@@ -37,32 +48,26 @@ public class ConnectionFactory {
             ConnectionFactory.connection = connection;
 
         } catch (SQLException e) {
-            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+            FileLogger.getFileLogger().writeExceptionToFile(e);
+            System.out.println("Unable to connect to database. Quitting...");
+            App.getApp().quitApp();
+        } catch (ClassNotFoundException e) {
+            FileLogger.getFileLogger().writeExceptionToFile(e);
+            System.out.println("JDBC driver not found. Cannot connect. Quitting...");
+            App.getApp().quitApp();
         } catch (IOException e) {
-            System.out.println("File not found: jdbc.properties. " + e);
-        } catch (Exception e) {
-            e.printStackTrace();
+            FileLogger.getFileLogger().writeExceptionToFile(e);
+            System.out.println("Database info not found. Quitting...");
+            App.getApp().quitApp();
         }
     }
 
-//    //depricate this
-//    public static ConnectionFactory createConnection(String filePath) {
-//        if(connectionFactory == null || !connPropsFilePath.equals(filePath)) {
-//            connPropsFilePath = filePath;
-//            Properties props = new Properties();
-//            try (FileReader jdbcPropFile = new FileReader(filePath);) {
-//                props.load(jdbcPropFile);
-//            } catch (IOException e) {
-//                System.out.println("File not found: jdbc.properties. " + e);
-//            } catch (Exception e) {
-//                System.out.println("Generic exception: " + e);
-//            }
-//            connectionFactory = new ConnectionFactory(props);
-//        }
-//
-//        return connectionFactory;
-//    }
 
+    /**
+     * Returns connection reference used to access database. If connection not yet
+     * established, invokes private constructor.
+     * @return reference to connection object used to access database
+     */
     public static Connection getConnection() {
         if(connectionFactory == null) {
             connectionFactory = new ConnectionFactory();
@@ -70,15 +75,24 @@ public class ConnectionFactory {
         return connection;
     }
 
+    /**
+     * Method to force connection to close. Gracefully terminates connection with database.
+     * Can be used to cause next call to getConnection() to invoke constructor
+     * and establish a new connection to database.
+     */
     public void closeConnection() {
         try {
             connection.close();
             connectionFactory = null;
         } catch (SQLException e) {
-            System.out.println("SQL Exception while closing conneciton: " + e);
+            FileLogger.getFileLogger().writeExceptionToFile(e);
         }
     }
 
+    /**
+     * calls closeConnection() upon destruction of this object to gracefully terminate
+     * connection before garbage collection
+     */
     public void finalize() {
         this.closeConnection();
     }

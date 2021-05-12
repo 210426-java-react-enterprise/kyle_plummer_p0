@@ -1,15 +1,19 @@
 package com.revature.p0.uis;
 
 import com.revature.p0.exceptions.UserInputException;
-import com.revature.p0.pojos.AccountPOJO;
 import com.revature.p0.pojos.UserPOJO;
 import com.revature.p0.services.AccountService;
 import com.revature.p0.services.Service;
 import com.revature.p0.services.UserService;
+import com.revature.p0.utils.FileLogger;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 
+/**
+ * User interface for account access, allows user to grant or revoke account access to another user by username
+ *
+ * @author Kyle Plummer
+ */
 public class AccountAccessUI extends UserInterface{
 
     public AccountAccessUI(BufferedReader consoleReader) {
@@ -44,10 +48,12 @@ public class AccountAccessUI extends UserInterface{
 
             AccountService.changeAccountAccess(targetUser, app.getCurrentAccount(), access);
             app.navigate("/accounthome");
-            return;
+            //return;
 
         } catch (UserInputException e) {
-            System.out.println("UserInputException: " + e);
+            FileLogger.getFileLogger().writeExceptionToFile(e);
+            app.navigate("/accounthome");
+            //return;
         }
     }
 }
