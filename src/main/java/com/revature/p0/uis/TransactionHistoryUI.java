@@ -2,13 +2,17 @@ package com.revature.p0.uis;
 
 import com.revature.p0.pojos.TransactionPOJO;
 import com.revature.p0.services.AccountService;
+import com.revature.p0.utils.FileLogger;
 import com.revature.p0.utils.datastructures.LinkedList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.sql.Timestamp;
 
-
+/**
+ * User interface for viewing all of the transactions associated with a bank account
+ *
+ * @author Kyle Plummer
+ */
 public class TransactionHistoryUI extends UserInterface{
     public TransactionHistoryUI(BufferedReader consoleReader) {
         super("/transactionhistory", consoleReader);
@@ -47,7 +51,9 @@ public class TransactionHistoryUI extends UserInterface{
                     return;
             }
         } catch (IOException e) {
-            System.out.println("IOException: " + e);
+            FileLogger.getFileLogger().writeExceptionToFile(e);
+            app.navigate("/quit");
+            //return;
         }
 
 

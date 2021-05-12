@@ -10,6 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
+/**
+ * Abstract class, contains methods to preform SQL CRUD operations pertaining to the transaction history
+ *
+ * @author Kyle Plummer
+ */
 public abstract class TransactionHistoryDAO extends DatabaseDAO{
 
     public static void addTransaction(UserPOJO user, AccountPOJO account, String type, Double amount) throws SQLException, NullPointerException {

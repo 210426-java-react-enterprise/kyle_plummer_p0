@@ -1,11 +1,17 @@
 package com.revature.p0.uis;
 
+import com.revature.p0.utils.FileLogger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * User interface for application entry. This is the first screen the user is presented with,
+ * allows uer to register or authenticate
+ *
+ * @author Kyle Plummer
+ */
 public class WelcomeUI extends UserInterface {
-
-    //private BufferedReader consoleReader;//moved into super class
 
     public WelcomeUI(BufferedReader consoleReader) {
         super("/welcome", consoleReader);
@@ -43,10 +49,10 @@ public class WelcomeUI extends UserInterface {
 
 
         } catch (IOException e) {
-            System.out.println("IOException" + e);
+            //System.out.println("IOException" + e);
+            FileLogger.getFileLogger().writeExceptionToFile(e);
+            app.navigate("/quit");
 
-        } catch (Exception e) {
-            System.out.println("Exception: " + e);
         }
     }
 }

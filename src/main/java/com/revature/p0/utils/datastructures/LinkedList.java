@@ -2,7 +2,11 @@ package com.revature.p0.utils.datastructures;
 
 import java.util.Iterator;
 
-
+/**
+ * Simple linkedlist implementation, extending custom list interface.
+ * Also implements Iterable interface.
+ * @param <T>
+ */
 public class LinkedList<T> implements List<T>, Iterable<T>{
     private Node<T> head;
     private Node<T> tail;
@@ -82,17 +86,24 @@ public class LinkedList<T> implements List<T>, Iterable<T>{
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException(index + " is out of bounds.");
         }
-        Node<T> cursor = head;
-        int i = 0;
-        while(i < index) {
-            cursor = cursor.next;
-            i++;
+
+        if(index == 0) {
+            head = head.next;
+            size--;
+        } else {
+
+            Node<T> cursor = head;
+            int i = 0;
+            while (i < index) {
+                cursor = cursor.next;
+                i++;
+            }
+            cursor.next.prev = cursor.prev;
+            cursor.prev.next = cursor.next;
+            cursor.prev = null;
+            cursor.next = null;
+            size--;
         }
-        cursor.next.prev = cursor.prev;
-        cursor.prev.next = cursor.next;
-        cursor.prev = null;
-        cursor.next = null;
-        size--;
     }
 
     @Override

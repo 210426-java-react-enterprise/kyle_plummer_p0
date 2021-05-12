@@ -3,10 +3,15 @@ package com.revature.p0.uis;
 import com.revature.p0.exceptions.UserInputException;
 import com.revature.p0.pojos.UserPOJO;
 import com.revature.p0.services.UserService;
+import com.revature.p0.utils.FileLogger;
 
 import java.io.BufferedReader;
 
-
+/**
+ * User interface for registering a new user account. Leads to user home.
+ *
+ * @author Kyle Plummer
+ */
 public class RegisterUI extends UserInterface{
 
     public RegisterUI(BufferedReader consoleReader) {
@@ -74,8 +79,10 @@ public class RegisterUI extends UserInterface{
             app.navigate("/userhome");
 
         } catch(UserInputException e) {
-           app.navigate("/welcome");
-           return;
+            System.out.println("Unable to register new user.");
+            FileLogger.getFileLogger().writeExceptionToFile(e);
+            app.navigate("/welcome");
+            //return;
         }
     }
 }
