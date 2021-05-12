@@ -1,7 +1,5 @@
 # kyle_plummer_p0
 
-# Project 0
-For Project 0, you will be building a console-based banking application. Presentation date: May 12th, 2021
 ## User Stories
 As a user, I can:
 - [x] register a new user account with the system (must be secured with a password)
