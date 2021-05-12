@@ -29,6 +29,8 @@ public abstract class UserDAO extends DatabaseDAO {
                 user.setAddress(rs.getString("streetaddress"));
                 user.setZipCode(rs.getString("zipcode"));
                 user.setEmail(rs.getString("email"));
+                user.setUsername(rs.getString("username")); //for testing purposes
+                user.setPassword(rs.getString("password")); //for testing purposes
                 user.setActive(rs.getBoolean("active"));
                 return true;
             }

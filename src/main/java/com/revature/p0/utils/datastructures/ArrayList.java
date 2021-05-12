@@ -2,8 +2,7 @@ package com.revature.p0.utils.datastructures;
 
 import com.revature.p0.utils.datastructures.List;
 
-public class ArrayList<T> implements List {
-    //private T[] array;
+public class ArrayList<T> implements List<T> {
     private Object[] array;
     private int size;
     private int maxSize;
@@ -53,11 +52,11 @@ public class ArrayList<T> implements List {
     }
 
     @Override
-    public Object get(int index) throws IndexOutOfBoundsException{
+    public T get(int index) throws IndexOutOfBoundsException{
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + " is out of bounds. Size  is currently: " + size);
         }
-        return array[index];
+        return (T)array[index];
     }
 
     @Override

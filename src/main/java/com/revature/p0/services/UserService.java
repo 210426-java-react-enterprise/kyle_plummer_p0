@@ -5,7 +5,6 @@ import com.revature.p0.pojos.UserPOJO;
 
 import java.sql.SQLException;
 import java.util.UUID;
-import java.util.regex.Pattern;
 
 
 public abstract class UserService extends Service{
