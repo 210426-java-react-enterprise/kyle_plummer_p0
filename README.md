@@ -20,7 +20,7 @@ As a user I can:
 ## Minimum Features
 - [x] Basic validation (no negative deposits/withdrawals, no overdrafting, etc.) 
 - [x] All exceptions are properly caught and handled
-- [?] Proper use of OOP principles
+- [ ] Proper use of OOP principles
 - [x] Documentation (all classes and methods have basic documentation)
 - [x] Use of custom data structures (do not use java.util Collection types!)
 - [x] SQL Data Persistance (at least 3 tables; all 3NF (normal form))
