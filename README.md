@@ -29,8 +29,6 @@ As a user I can:
 - [x] Apache Maven
 - [x] PostGreSQL deployed on AWS RDS
 - [x] Git SCM (on GitHub)
-## Init Instructions
-- Create a new repository within this organization (naming convention: `firstname_lastname_p0`)
 ## Presentation
 - [ ] finalized version of application must be pushed to personal repository within this organization by the presentation date
 - [ ] 5 minute live demonstration of the implemented features
