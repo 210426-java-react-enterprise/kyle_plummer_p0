@@ -27,7 +27,7 @@ public class UserHomeUI extends UserInterface{
                 app.getCurrentUser().getFirstName());
         System.out.println("N) New Account");
         for (int i = 0; i < accountList.size(); i++) {
-            System.out.printf("%d) %s: %d (Bal: $%.2f)\n", i, accountList.get(i).getAccountType(),
+            System.out.printf("%d) %s: %d (Bal: $%.2f)\n", i, accountList.get(i).getAccountDescription(),
                     accountList.get(i).getAccountNum(), accountList.get(i).getBalance());
         }
         System.out.println("Q) Quit");

@@ -20,8 +20,6 @@ public class TransactionHistoryUI extends UserInterface{
 
     @Override
     public void render() {
-//        System.out.printf("\n\n\n%s - %d  (Bal: $%.2f)\n", app.getCurrentAccount().getAccountDescription(),
-//                app.getCurrentAccount().getAccountNum(), app.getCurrentAccount().getBalance());
         System.out.printf("\n\n\n%s (Acct# %d)  (Bal: $%.2f)\n", app.getCurrentAccount().getAccountDescription(),
                 app.getCurrentAccount().getAccountNum(), app.getCurrentAccount().getBalance());
         System.out.println("Transaction History:\n==================================================");
