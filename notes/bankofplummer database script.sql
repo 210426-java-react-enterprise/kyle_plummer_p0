@@ -33,7 +33,7 @@ user_ID UUID not null,
 firstname varchar(40) not null,
 lastname varchar(40) not null,
 streetaddress varchar(40),
-zipcode int,
+zipcode char(5),
 email varchar(40),
 username varchar(20) unique not null,
 password varchar(40) not null,
@@ -52,10 +52,10 @@ CREATE SEQUENCE account_num_seq
 --drop table if exists accounts;
 create table accounts (
 account_ID UUID not null,
-account_num int not null default nextval('account_num_seq'),
+account_num int unique not null default nextval('account_num_seq'),
 account_type varchar(20) not null,
 account_desc varchar(50) not null,
-balance numeric not null,
+balance decimal(30,2) not null,
 active bool not null,
 primary key (account_ID)
 );
@@ -68,6 +68,7 @@ account_ID UUID not null references accounts on delete restrict,
 user_ID UUID not null references users on delete restrict,
 transaction_type varchar(20) not null,
 amount numeric not null,
+transaction_date timestamp not null,
 primary key (transaction_ID),
 foreign key (account_ID) references accounts (account_ID),
 foreign key (user_ID) references users (user_ID)
@@ -109,8 +110,8 @@ begin
 	raise notice 'shared_account_access_ID is %', shared_account_access_ID;
 
 	--select * from users
-	insert into users values (kyle_user_ID,  'Kyle', 'Plummer', '925 Ford rd.', 12121, 'kyle.plummer@revature.net', 'kplummer', 'password', true);
-	insert into users values (tom_user_ID, 'Tom', 'Smith', '1 Way St.', 12180, 'tom.smith@gmail.com', 'tsmith', 'password', true);
+	insert into users values (kyle_user_ID,  'Kyle', 'Plummer', '925 Ford rd.', '12121', 'kyle.plummer@revature.net', 'kplummer', 'password', true);
+	insert into users values (tom_user_ID, 'Tom', 'Smith', '1 Way St.', '12180', 'tom.smith@gmail.com', 'tsmith', 'password', true);
 	
 	--select * from accounts
 	insert into accounts (account_id, account_type, account_desc, balance, active) values (kyle_account_ID, 'checking', 'Kyle''s Checking Account', 0.00, true);
@@ -122,17 +123,23 @@ begin
 	insert into account_access values (shared_account_access_ID, tom_user_ID, kyle_account_ID);
 
 	--select * from transaction_history
-	insert into transaction_history values (uuid_generate_v1mc(), tom_account_ID, tom_user_ID, 'deposit', 1000.00);
-	insert into transaction_history values (uuid_generate_v1mc(), tom_account_ID, tom_user_ID, 'deposit', 200.00);
-	insert into transaction_history values (uuid_generate_v1mc(), tom_account_ID, tom_user_ID, 'deposit', 50.00);
-	insert into transaction_history values (uuid_generate_v1mc(), tom_account_ID, tom_user_ID, 'deposit', 0.99);
-	
+	insert into transaction_history values (uuid_generate_v1mc(), tom_account_ID, tom_user_ID, 'deposit', 1000.00, NOW());
+	insert into transaction_history values (uuid_generate_v1mc(), tom_account_ID, tom_user_ID, 'deposit', 200.00, NOW());
+	insert into transaction_history values (uuid_generate_v1mc(), tom_account_ID, tom_user_ID, 'deposit', 50.00, NOW());
+	insert into transaction_history values (uuid_generate_v1mc(), tom_account_ID, tom_user_ID, 'deposit', 0.99, NOW());
+
+	--test values
+	insert into users values ('4aed96ae-b328-11eb-b538-fba1f9307d97', 'testfirstname', 'testlastname', 'testaddress', '00000', 'test@email.com', 'testuser', 'testpass', true);
+	insert into accounts values ('4aed98e8-b328-11eb-b53a-83cc36f981e7', 1000001, 'test', 'test account', 0, true);
+	insert into account_access values ('4aedaa68-b328-11eb-b53b-378bdb7dc0d7', '4aed96ae-b328-11eb-b538-fba1f9307d97', '4aed98e8-b328-11eb-b53a-83cc36f981e7');
+	insert into transaction_history values ('4af080d0-b328-11eb-b53e-fb637c84cdc0', '4aed98e8-b328-11eb-b53a-83cc36f981e7', '4aed96ae-b328-11eb-b538-fba1f9307d97', 'test', 0, '2000-01-01 12:12:12');
+	insert into transaction_history values ('5af080d0-b328-11eb-b53e-fb637c84cdc1', '4aed98e8-b328-11eb-b53a-83cc36f981e7', '4aed96ae-b328-11eb-b538-fba1f9307d97', 'test', 0, '2000-01-01 12:12:12');
 	
 	RETURN 1;
 END;
 $$ LANGUAGE plpgsql;
 
---select populatedata();
+select populatedata();
 
 
 
@@ -160,9 +167,6 @@ grant usage on schema bankofplummer to appuser;
 grant create on schema bankofplummer to appuser;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA bankofplummer TO appuser;
 GRANT all privileges ON ALL TABLES IN SCHEMA bankofplummer TO appuser;
-
-
-
-
+GRANT all privileges ON ALL SEQUENCES IN SCHEMA bankofplummer TO appuser;
 
 

@@ -30,6 +30,8 @@ public abstract class UserService extends Service{
         } catch (SQLException e) {
             //System.out.println("SQLException: "+ e);
             FileLogger.getFileLogger().writeExceptionToFile(e);
+        } catch (NullPointerException e) {
+            FileLogger.getFileLogger().writeExceptionToFile(e);
         }
         return null;
     }

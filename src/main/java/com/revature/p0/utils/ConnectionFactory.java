@@ -18,6 +18,7 @@ public class ConnectionFactory {
     private static String connPropsFilePath;
 
     static {
+        //System.out.println("DEBUG: connectionFactory static block");
         connPropsFilePath = "src/main/resources/jdbc.properties";
     }
 
@@ -31,6 +32,8 @@ public class ConnectionFactory {
         Properties props = new Properties();
         try (FileReader jdbcPropFile = new FileReader(connPropsFilePath)){
             props.load(jdbcPropFile);
+            Class.forName(props.getProperty("driver"));
+            //System.out.println("DEBUG: ConnectionFactory props file loaded, about to get connection");
             Connection connection = DriverManager.getConnection(
                 "jdbc:postgresql://"
                         + props.getProperty("host") + ":"
@@ -39,7 +42,8 @@ public class ConnectionFactory {
                         + "?currentSchema=" + props.getProperty("schemaname"),
                 props.getProperty("username"),
                 props.getProperty("password"));
-            Class.forName(props.getProperty("driver"));
+            //System.out.println("Connection established");
+
             if (connection != null) {
                 //System.out.println("Connected to the database!");
             } else {
