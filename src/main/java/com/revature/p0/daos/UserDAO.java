@@ -14,7 +14,7 @@ import java.util.UUID;
  */
 public abstract class UserDAO extends DatabaseDAO {
 
-    public static boolean authenticate(UserPOJO user) throws SQLException {
+    public static boolean authenticate(UserPOJO user) throws SQLException, NullPointerException {
 
         String sql = "SELECT user_id, firstname, lastname, streetaddress, zipcode, email, username, password, active " +
                     "FROM users " +
