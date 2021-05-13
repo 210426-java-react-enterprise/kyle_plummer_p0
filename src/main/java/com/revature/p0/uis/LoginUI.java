@@ -46,6 +46,10 @@ public class LoginUI extends UserInterface{
             FileLogger.getFileLogger().writeExceptionToFile(e);
             app.navigate("/quit");
             //return;
-        } //catch ()
+        } catch (NullPointerException e) {
+            FileLogger.getFileLogger().writeExceptionToFile(e);
+            System.out.println("Unable to log in. Please try again.");
+            app.navigate("/welcome");
+        }
     }
 }
